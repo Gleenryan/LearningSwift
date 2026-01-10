@@ -4,6 +4,8 @@ let phi = 3.14
 //var -> value can change
 var length = 10
 var nama = "Ryan"
+var money = 1_000_000
+print(money)
 
 //you can declare  wihtout value
 let maxloginattempts: Int
@@ -51,3 +53,57 @@ name = "Ryan"
 print(name)
 //?? only for optional -> more for fallback
 print(name ?? "no name") // coalescing operator, can't be done without nil
+
+// multiple if can be used by -->  ,
+if let first = Int("4"), let second = Int("42"), first < second && second < 100 {
+    print("\(first) < \(second) < 100")
+}
+//same as
+if let firstNumber = Int("4") {
+    if let secondNumber = Int("42") {
+        if firstNumber < secondNumber && secondNumber < 100 {
+            print("\(firstNumber) < \(secondNumber) < 100")
+        }
+    }
+}
+
+//force unwrapping(!) -> tell swift it will never be nil
+// let number = Int("123")
+// print(number!)
+
+//stop execution immediately --> fatalError()
+//fatalError("unimplemented")
+
+//ERROR HANDLING --> do try catch, error can be enumed
+
+enum SandwichError: Error {
+    case noBread
+}
+
+func makeSandwich() throws {
+    let hasBread = false
+
+    if !hasBread {
+        throw SandwichError.noBread
+    }
+
+    print("Sandwich made")
+}
+
+do {
+    try makeSandwich()
+    print("Eating sandwich")
+} catch SandwichError.noBread {
+    print("Can't make sandwich cz no bread")
+}
+
+
+//DEBUGGING TOOLS FOR DEVELOPER
+//assert -> only in debug mode n will crash if not satisfied, will be ignored when released
+let agez = -5
+// if agez < 0 {
+//     assertionFailure("Age must be positive")
+// }
+// assert(agez >= 0, "Age must be positive")
+
+//precondition --> same like assert but will also be checked in release mode
